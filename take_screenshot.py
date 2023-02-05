@@ -45,16 +45,20 @@ while True:
 
              #checking if all fingers are folded
             if all(finger_fold_status):
-                
-                # WRITE THE CODE HERE   
-            
+                # take a screenshot of the screen and store it in memory, then
+                # convert the PIL/Pillow image to an OpenCV compatible NumPy array
+                # and finally write the image to disk
                 image = pyautogui.screenshot()
-                image = cv2.cvtColor(np.array(image),cv2.COLOR_RGB2BGR)
-                cv2.imwrite("in_memory_to_disk",image)
+                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+                cv2.imwrite("in_memory_to_disk.png", image)
+
+                # this time take a screenshot directly to disk
                 pyautogui.screenshot("straight_to_disk.png")
 
-                image=cv2.imread("straight_to_disk.png")
-                cv2.imshow("ScreenShot",imutils.resize(image,width=600))
+                # we can then load our screenshot from disk in OpenCV format
+                image = cv2.imread("straight_to_disk.png")
+                cv2.imshow("Screenshot", imutils.resize(image, width=600))
+
 
 
 
@@ -66,9 +70,3 @@ while True:
 
     cv2.imshow("hand tracking", img)
     cv2.waitKey(1)
-
-
-
-
-
-
